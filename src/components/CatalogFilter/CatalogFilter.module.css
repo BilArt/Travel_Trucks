@@ -1,0 +1,26 @@
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filterGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 4px;
+  }
+  
+  input[type="text"],
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  

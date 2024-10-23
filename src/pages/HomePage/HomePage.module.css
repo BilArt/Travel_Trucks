@@ -1,6 +1,5 @@
 .homepage_container {
-  padding: 260px 64px 260px 64px;
-  background-image: url("../../assets/HomePage/hero.jpg");
+  padding: 260px 64px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -8,7 +7,7 @@
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .homepage_container {
-    background-image: url("../../assets//HomePage/hero@2x.jpg");
+    background-image: url("../../assets/HomePage/hero@2x.jpg");
   }
 }
 

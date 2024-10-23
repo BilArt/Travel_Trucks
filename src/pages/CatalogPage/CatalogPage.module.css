@@ -1,0 +1,16 @@
+.catalogContainer {
+  display: flex;
+}
+
+.filterSection {
+  width: 25%;
+  padding: 20px;
+}
+
+.camperCards {
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
