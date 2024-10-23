@@ -1,3 +1,4 @@
+import iconSprite from '../../assets/icons.svg';
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 
@@ -6,7 +7,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <svg className={styles.icon}>
-          <use xlinkHref="/src/img/icons.svg#icon-travel_trucks"></use>
+        <use xlinkHref={`${iconSprite}#icon-travel_trucks`}></use>
         </svg>
       </div>
       <nav className={styles.nav}>

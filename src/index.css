@@ -8,7 +8,6 @@
   font-weight: 500;
   font-size: 16px;
 
-
   /* COLORS */
   --main: #101828;
   --text: #475467;
@@ -20,4 +19,31 @@
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  border-radius: 200px;
+  padding: 16px 60px;
+  color: var(--white);
+  border: 0;
+  background-color: var(--button);
+}
+
+button:hover {
+  background-color: var(--button-hover);
+  cursor: pointer;
 }
