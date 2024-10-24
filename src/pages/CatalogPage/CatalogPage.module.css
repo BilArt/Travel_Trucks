@@ -1,16 +1,45 @@
-.catalogContainer {
-  display: flex;
+.catalog_container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 64px;
+  padding: 48px 64px;
 }
 
-.filterSection {
+.label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+
+.search_input {
+  display: flex;
+  border-radius: 12px;
+  padding: 18px 218px 18px 20px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--main);
+  background-color: var(--inputs);
+  border: none;
+  margin-bottom: 40px;
+}
+
+.search_input::placeholder {
+  color: var(--main);
+  opacity: 1;
+}
+
+.filter_section {
   width: 25%;
   padding: 20px;
+  margin-right: 64px;
 }
 
-.camperCards {
+.cards_section{
   width: 75%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 20px;
 }

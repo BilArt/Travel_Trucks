@@ -23,7 +23,7 @@ const campersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCampers.peding, (state) => {
+      .addCase(fetchCampers.pending, (state) => { 
         state.status = "loading";
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
