@@ -31,7 +31,11 @@ p {
   padding: 0;
 }
 
-button {
+input {
+  margin: 0;
+}
+
+.primary_button {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -41,9 +45,10 @@ button {
   color: var(--white);
   border: 0;
   background-color: var(--button);
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
+.primary_button:hover {
   background-color: var(--button-hover);
   cursor: pointer;
 }
