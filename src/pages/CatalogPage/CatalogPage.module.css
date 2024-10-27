@@ -58,13 +58,14 @@
 
 /* Filters Section */
 .filters_title {
-font-weight: 500;
-font-size: 16px;
-line-height: 150%;
-color: var(--text);font-weight: 500;
-font-size: 16px;
-line-height: 150%;
-color: var(--text);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text);
 }
 
 .filter_category {
@@ -103,7 +104,8 @@ color: var(--text);
   transition: border-color 0.3s ease;
 }
 
-.option:hover, .option:focus {
+.option:hover,
+.option:focus {
   border-color: var(--button-hover);
 }
 
@@ -123,10 +125,13 @@ color: var(--text);
   justify-content: left;
 }
 
+.search_button {
+  padding: 16px 56px;
+}
+
 /* Cards Section */
 .cards_section {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }

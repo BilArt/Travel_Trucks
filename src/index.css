@@ -21,7 +21,7 @@
   --rating: #ffc531;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
 }
@@ -41,7 +41,6 @@ input {
   line-height: 1.5;
   letter-spacing: -0.01em;
   border-radius: 200px;
-  padding: 16px 60px;
   color: var(--white);
   border: 0;
   background-color: var(--button);

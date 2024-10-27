@@ -1,34 +1,127 @@
 .card {
+  border: 1px solid var(--gray-light);
+  border-radius: 20px;
+  padding: 24px;
   display: flex;
-  flex-direction: column;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
+  align-items: flex-start;
+  gap: 24px;
 }
 
-.image {
-  width: 100%;
-  height: 200px;
+.image_placeholder {
+  width: 292px;
+  height: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.image_placeholder img {
+  width: 292px;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: cover;
 }
 
 .details {
-  padding: 16px;
+  flex: 1;
+}
+
+.name_and_price_favorite {
+  display: flex;
+  justify-content: space-between;
 }
 
 .name {
-  font-size: 18px;
   font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--main);
+  margin-bottom: 8px;
+}
+
+.price_and_favorite {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .price {
-  font-size: 16px;
-  color: var(--button);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--main);
 }
 
-.link {
-  margin-top: 12px;
-  text-decoration: none;
-  color: var(--button-hover);
-  font-weight: 500;
+.favorite_icon {
+  width: 26px;
+  height: 24px;
+  transition: fill 0.3s ease;
+  cursor: pointer;
+}
+
+.favorite_icon:hover,
+.favorite_icon:focus {
+  fill: var(--button);
+}
+
+.rating_and_location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.rating,
+.location {
+  display: flex;
+  align-items: center;
+}
+
+.star_icon,
+.location_icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.star_icon {
+  fill: var(--badges);
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.features {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--gray-light);
+  border-radius: 20px;
+  background-color: var(--badges);
+  font-size: 14px;
+  color: var(--main);
+}
+
+.featureIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--main);
+}
+
+.show_more_button {
+  padding: 16px 40px;
 }

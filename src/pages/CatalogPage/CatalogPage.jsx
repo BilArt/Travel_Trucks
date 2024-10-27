@@ -1,3 +1,4 @@
+// src/pages/CatalogPage/CatalogPage.jsx
 import { useEffect } from "react";
 import iconSprite from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,10 @@ const CatalogPage = () => {
     }
   }, [dispatch, status]);
 
+  useEffect(() => {
+    console.log("Campers data:", campers);
+  }, [campers]);
+
   if (status === "loading") {
     return <div>Loading...</div>;
   }
@@ -23,7 +28,7 @@ const CatalogPage = () => {
     return <div>Error: {error}</div>;
   }
 
-  const campersList = Array.isArray(campers) ? campers : [];
+  const campersList = campers?.items || [];
 
   return (
     <div className={styles.catalog_container}>
@@ -98,7 +103,6 @@ const CatalogPage = () => {
               Van
             </button>
             <button className={styles.option}>
-              {" "}
               <svg className={styles.option_icon}>
                 <use xlinkHref={`${iconSprite}#icon-grid_2_2`}></use>
               </svg>
@@ -115,7 +119,7 @@ const CatalogPage = () => {
 
         {/* Search Button */}
         <div className={styles.search_button_container}>
-          <button className="primary_button">
+          <button className={`${styles.search_button} primary_button`}>
             Search
           </button>
         </div>

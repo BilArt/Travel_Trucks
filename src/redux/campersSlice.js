@@ -1,11 +1,6 @@
+// src/redux/campersSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const initialState = {
-  campers: [],
-  status: "idle",
-  error: null,
-};
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
@@ -19,11 +14,15 @@ export const fetchCampers = createAsyncThunk(
 
 const campersSlice = createSlice({
   name: "campers",
-  initialState,
+  initialState: {
+    campers: { total: 0, items: [] },
+    status: "idle",
+    error: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCampers.pending, (state) => { 
+      .addCase(fetchCampers.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
