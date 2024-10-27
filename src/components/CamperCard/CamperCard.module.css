@@ -95,20 +95,23 @@
   font-size: 16px;
   line-height: 1.5;
   color: var(--text);
+  margin-bottom: 24px;
 }
 
 .features {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  margin: 8px 0;
+  gap: 8px;
+  margin-bottom: 42px;
+  width: 400px;
+  max-width: 100%;
 }
 
 .feature {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 12px 18px;
   border: 1px solid var(--gray-light);
   border-radius: 20px;
   background-color: var(--badges);
@@ -116,12 +119,14 @@
   color: var(--main);
 }
 
-.featureIcon {
-  width: 18px;
-  height: 18px;
+.feature_icon {
+  width: 20px;
+  height: 20px;
   fill: var(--main);
 }
 
 .show_more_button {
+  margin-top: auto;
   padding: 16px 40px;
+  text-decoration: none;
 }
