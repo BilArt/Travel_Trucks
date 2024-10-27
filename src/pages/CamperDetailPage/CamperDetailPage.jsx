@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCamperById } from "../../redux/campersSlice";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CamperDetailPage.module.css";
 import iconSprite from "../../assets/icons.svg";
 
@@ -10,14 +12,12 @@ const CamperDetailPage = () => {
   const dispatch = useDispatch();
   const { camper, status, error } = useSelector((state) => state.campers);
 
-  useEffect(() => {
-    console.log("Fetching camper with ID:", id);
-    dispatch(fetchCamperById(id));
-  }, [dispatch, id]);
+  const [activeTab, setActiveTab] = useState("features");
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
-    console.log("Camper data in component:", camper);
-  }, [camper]);
+    dispatch(fetchCamperById(id));
+  }, [dispatch, id]);
 
   if (status === "loading") return <div>Loading...</div>;
   if (status === "failed") return <div>Error: {error}</div>;
@@ -37,6 +37,10 @@ const CamperDetailPage = () => {
     { name: "Bathroom", icon: "shower", available: camper.bathroom },
     { name: "Petrol", icon: "petrol", available: camper.engine === "petrol" },
   ];
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className={styles.container}>
@@ -80,61 +84,130 @@ const CamperDetailPage = () => {
       <p className={styles.description}>{camper.description}</p>
 
       <div className={styles.tabs}>
-        <h2 className={styles.section_title}>Features</h2>
-        <h2 className={styles.section_title}>Reviews</h2>
+        <button
+          onClick={() => handleTabChange("features")}
+          className={`${styles.tab_button} ${
+            activeTab === "features" ? styles.active : ""
+          }`}
+        >
+          Features
+        </button>
+        <button
+          onClick={() => handleTabChange("reviews")}
+          className={`${styles.tab_button} ${
+            activeTab === "reviews" ? styles.active : ""
+          }`}
+        >
+          Reviews
+        </button>
       </div>
 
       <div className={styles.content}>
-        <div className={styles.features_section}>
-          <div className={styles.features}>
-            {featuresList
-              .filter((feature) => feature.available)
-              .map((feature, index) => (
-                <div key={index} className={styles.feature}>
-                  <svg className={styles.feature_icon}>
-                    <use xlinkHref={`${iconSprite}#icon-${feature.icon}`}></use>
-                  </svg>
-                  {feature.name}
-                </div>
-              ))}
-          </div>
+        {activeTab === "features" ? (
+          <div className={styles.features_section}>
+            <div className={styles.features}>
+              {featuresList
+                .filter((feature) => feature.available)
+                .map((feature, index) => (
+                  <div key={index} className={styles.feature}>
+                    <svg className={styles.feature_icon}>
+                      <use
+                        xlinkHref={`${iconSprite}#icon-${feature.icon}`}
+                      ></use>
+                    </svg>
+                    {feature.name}
+                  </div>
+                ))}
+            </div>
 
-          <div className={styles.details}>
-            <h2 className={styles.sectionTitle}>Vehicle details</h2>
-            <p>
-              <strong>Form:</strong> {camper.form}
-            </p>
-            <p>
-              <strong>Length:</strong> {camper.length}
-            </p>
-            <p>
-              <strong>Width:</strong> {camper.width}
-            </p>
-            <p>
-              <strong>Height:</strong> {camper.height}
-            </p>
-            <p>
-              <strong>Tank:</strong> {camper.tank}
-            </p>
-            <p>
-              <strong>Consumption:</strong> {camper.consumption}
-            </p>
+            <div className={styles.details}>
+              <h2 className={styles.section_title}>Vehicle details</h2>
+              <p>
+                <strong>Form:</strong> {camper.form}
+              </p>
+              <p>
+                <strong>Length:</strong> {camper.length}
+              </p>
+              <p>
+                <strong>Width:</strong> {camper.width}
+              </p>
+              <p>
+                <strong>Height:</strong> {camper.height}
+              </p>
+              <p>
+                <strong>Tank:</strong> {camper.tank}
+              </p>
+              <p>
+                <strong>Consumption:</strong> {camper.consumption}
+              </p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={styles.reviews_section}>
+            {camper.reviews && camper.reviews.length > 0 ? (
+              camper.reviews.map((review, index) => (
+                <div key={index} className={styles.review_card}>
+                  <div className={styles.avatar}>{review.reviewer_name[0]}</div>
+                  <div className={styles.review_content}>
+                    <div className={styles.review_header}>
+                      <strong className={styles.reviewer_name}>
+                        {review.reviewer_name}
+                      </strong>
+                      <span className={styles.review_rating}>
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <svg
+                            key={i}
+                            className={styles.star_icon}
+                            style={{
+                              fill:
+                                i < review.reviewer_rating ? "#ffc531" : "#ddd",
+                            }}
+                          >
+                            <use
+                              xlinkHref={`${iconSprite}#icon-rating_star`}
+                            ></use>
+                          </svg>
+                        ))}
+                      </span>
+                    </div>
+                    <p className={styles.review_text}>{review.comment}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No reviews available</p>
+            )}
+          </div>
+        )}
 
         <div className={styles.booking_section}>
-          <h2 className={styles.sectionTitle}>Book your campervan now</h2>
-          <p>Stay connected! We are always ready to help you.</p>
-          <form className={styles.bookingForm}>
-            <label>Name*</label>
-            <input type="text" required />
-            <label>Email*</label>
-            <input type="email" required />
-            <label>Booking date*</label>
-            <input type="date" required />
-            <label>Comment</label>
-            <textarea rows="3"></textarea>
-            <button type="submit" className={styles.submitButton}>
+          <h2 className={`${styles.section_title} ${styles.form_title}`}>
+            Book your campervan now
+          </h2>
+          <p className={styles.form_text}>
+            Stay connected! We are always ready to help you.
+          </p>
+          <form className={styles.booking_form}>
+            <input type="text" placeholder="Name*" required />
+            <input type="email" placeholder="Email*" required />
+
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              dateFormat="dd.MM.yyyy"
+              placeholderText="dd.mm.yyyy"
+              className={`${styles.input} ${styles.date_input}`}
+            />
+
+            <textarea
+              placeholder="Comment"
+              rows="3"
+              style={{ resize: "none" }}
+            ></textarea>
+            <button
+              type="submit"
+              className={`${styles.submit_button} primary_button`}
+            >
               Send
             </button>
           </form>
