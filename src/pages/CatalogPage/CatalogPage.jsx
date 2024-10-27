@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import iconSprite from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/campersSlice";
 import CamperCard from "../../components/CamperCard/CamperCard";
@@ -30,21 +31,16 @@ const CatalogPage = () => {
         <label htmlFor="location" className={styles.label}>
           Location
         </label>
-        <input
-          type="text"
-          placeholder="Search by location"
-          className={styles.search_input}
-        />
-
-        {/*/////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
-         HERE NEED TO ADD FILTERS!!!!
-        /////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////// */}
+        <div className={styles.input_container}>
+          <svg className={styles.icon}>
+            <use xlinkHref={`${iconSprite}#icon-location`}></use>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search by location"
+            className={styles.search_input}
+          />
+        </div>
       </div>
       <div className={styles.cards_section}>
         {campersList.length > 0 ? (
