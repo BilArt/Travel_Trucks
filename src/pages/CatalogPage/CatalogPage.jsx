@@ -1,4 +1,3 @@
-// src/pages/CatalogPage/CatalogPage.jsx
 import { useEffect } from "react";
 import iconSprite from "../../assets/icons.svg";
 import { useDispatch, useSelector } from "react-redux";

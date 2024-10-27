@@ -1,0 +1,156 @@
+.container {
+  margin: 0 auto;
+  padding: 48px 64px;
+}
+
+.header {
+  margin-bottom: 28px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--main);
+  margin-bottom: 8px;
+}
+
+.rating_location {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  color: var(--main);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.rating,
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star_icon {
+  width: 16px;
+  height: 16px;
+}
+
+.star_icon_yellow {
+  fill: var(--rating);
+}
+
+.location_icon {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 28px;
+}
+
+.gallery_image {
+  max-width: calc(25% - 48px);
+  height: 312px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text);
+  margin-bottom: 60px;
+}
+
+.content {
+  display: flex;
+  gap: 40px;
+}
+
+.features_section,
+.booking_section {
+  flex: 1;
+  background: var(--inputs);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tabs {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 44px;
+  padding-bottom: 24px;
+  border-bottom: 1 solid var(--inputs);
+}
+
+.section_title {
+  padding-bottom: 24px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--main);
+  border-bottom: 5px solid var(--button);
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: var(--badges);
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.feature_icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.details p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bookingForm input,
+.bookingForm textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.submitButton {
+  padding: 10px;
+  border: none;
+  background-color: #e44848;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
