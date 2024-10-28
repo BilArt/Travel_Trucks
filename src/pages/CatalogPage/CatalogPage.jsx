@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { fetchCampers } from "../../redux/campersSlice";
 import CamperCard from "../../components/CamperCard/CamperCard";
 import CatalogFilter from "../../components/CatalogFilter/CatalogFilter";
@@ -13,7 +13,6 @@ const CatalogPage = () => {
     vehicleType: [],
     location: "",
   });
-  const [visibleCount, setVisibleCount] = useState(4); // Отображаем 4 карточки изначально
 
   useEffect(() => {
     if (status === "idle") {
@@ -46,8 +45,10 @@ const CatalogPage = () => {
     return activeFilters[filterType].includes(filterValue);
   };
 
-  const filteredCampersList =
-    campers?.items?.filter((camper) => {
+  const [filteredCampers, setFilteredCampers] = useState(campers?.items || []);
+
+  const handleSearch = () => {
+    const filteredList = campers?.items?.filter((camper) => {
       const matchesEquipment = activeFilters.equipment.every((filter) => {
         if (filter === "transmission") {
           return camper.transmission === "automatic";
@@ -68,11 +69,20 @@ const CatalogPage = () => {
           .includes(activeFilters.location.toLowerCase());
 
       return matchesEquipment && matchesVehicleType && matchesLocation;
-    }) || [];
+    });
 
-  const loadMoreCards = () => {
-    setVisibleCount((prevCount) => prevCount + 4); // Увеличиваем количество видимых карточек на 4
+    setFilteredCampers(filteredList || []);
   };
+
+  useEffect(() => {
+    if (
+      !activeFilters.equipment.length &&
+      !activeFilters.vehicleType.length &&
+      !activeFilters.location
+    ) {
+      setFilteredCampers(campers?.items || []);
+    }
+  }, [campers, activeFilters]);
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -89,19 +99,15 @@ const CatalogPage = () => {
         onLocationChange={handleLocationChange}
         isActiveFilter={isActiveFilter}
         activeFilters={activeFilters}
+        onSearch={handleSearch}
       />
-
       <div className={styles.cards_section}>
-        {filteredCampersList.slice(0, visibleCount).map((camper) => (
-          <CamperCard key={camper.id} camper={camper} />
-        ))}
-        {visibleCount < filteredCampersList.length && (
-          <button
-            onClick={loadMoreCards}
-            className={`${styles.load_more_button}`}
-          >
-            Load More
-          </button>
+        {filteredCampers.length > 0 ? (
+          filteredCampers.map((camper) => (
+            <CamperCard key={camper.id} camper={camper} />
+          ))
+        ) : (
+          <div>No campers found</div>
         )}
       </div>
     </div>

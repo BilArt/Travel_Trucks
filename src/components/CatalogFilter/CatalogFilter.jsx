@@ -6,6 +6,7 @@ const CatalogFilter = ({
   onFilterChange,
   onLocationChange,
   isActiveFilter,
+  onSearch,
 }) => {
   const equipmentFilters = [
     { label: "AC", icon: "ac", value: "AC" },
@@ -93,7 +94,10 @@ const CatalogFilter = ({
       </div>
 
       <div className={styles.search_button_container}>
-        <button className={`${styles.search_button} primary_button`}>
+        <button
+          className={`${styles.search_button} primary_button`}
+          onClick={onSearch}
+        >
           Search
         </button>
       </div>
@@ -104,7 +108,9 @@ const CatalogFilter = ({
 CatalogFilter.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   onLocationChange: PropTypes.func.isRequired,
+  activeFilters: PropTypes.object.isRequired,
   isActiveFilter: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default CatalogFilter;

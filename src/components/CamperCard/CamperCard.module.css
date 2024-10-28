@@ -64,6 +64,12 @@
   fill: var(--button);
 }
 
+.active {
+  fill: var(
+    --button
+  );
+}
+
 .rating_and_location {
   display: flex;
   align-items: center;
