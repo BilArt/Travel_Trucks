@@ -2,7 +2,11 @@ import PropTypes from "prop-types";
 import styles from "./CatalogFilter.module.css";
 import iconSprite from "../../assets/icons.svg";
 
-const CatalogFilter = ({ onFilterChange, onLocationChange }) => {
+const CatalogFilter = ({
+  onFilterChange,
+  onLocationChange,
+  isActiveFilter,
+}) => {
   const equipmentFilters = [
     { label: "AC", icon: "ac", value: "AC" },
     { label: "Automatic", icon: "transmission", value: "transmission" },
@@ -43,9 +47,16 @@ const CatalogFilter = ({ onFilterChange, onLocationChange }) => {
         <div className={styles.options}>
           {equipmentFilters.map((filter) => (
             <button
-              key={filter.value}
-              className={styles.option}
-              onClick={() => onFilterChange(filter.value)}
+              key={`${filter.value}-${isActiveFilter(
+                "equipment",
+                filter.value
+              )}`}
+              className={`${styles.option} ${
+                isActiveFilter("equipment", filter.value)
+                  ? styles.active_option
+                  : ""
+              }`}
+              onClick={() => onFilterChange("equipment", filter.value)}
             >
               <svg className={styles.option_icon}>
                 <use xlinkHref={`${iconSprite}#icon-${filter.icon}`}></use>
@@ -61,9 +72,16 @@ const CatalogFilter = ({ onFilterChange, onLocationChange }) => {
         <div className={styles.options}>
           {vehicleTypeFilters.map((filter) => (
             <button
-              key={filter.value}
-              className={styles.option}
-              onClick={() => onFilterChange(filter.value)}
+              key={`${filter.value}-${isActiveFilter(
+                "vehicleType",
+                filter.value
+              )}`}
+              className={`${styles.option} ${
+                isActiveFilter("vehicleType", filter.value)
+                  ? styles.active_option
+                  : ""
+              }`}
+              onClick={() => onFilterChange("vehicleType", filter.value)}
             >
               <svg className={styles.option_icon}>
                 <use xlinkHref={`${iconSprite}#icon-${filter.icon}`}></use>
@@ -86,6 +104,8 @@ const CatalogFilter = ({ onFilterChange, onLocationChange }) => {
 CatalogFilter.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   onLocationChange: PropTypes.func.isRequired,
+  activeFilters: PropTypes.object.isRequired,
+  isActiveFilter: PropTypes.func.isRequired,
 };
 
 export default CatalogFilter;

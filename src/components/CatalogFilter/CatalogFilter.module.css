@@ -107,6 +107,11 @@
   border-color: var(--button);
 }
 
+.active_option {
+  border-color: var(--button);
+  background-color: var(--inputs-hover);
+}
+
 .option_icon {
   width: 32px;
   height: 32px;

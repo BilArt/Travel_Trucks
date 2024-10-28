@@ -8,7 +8,11 @@ import styles from "./CatalogPage.module.css";
 const CatalogPage = () => {
   const dispatch = useDispatch();
   const { campers, status, error } = useSelector((state) => state.campers);
-  const [activeFilters, setActiveFilters] = useState([]);
+  const [activeFilters, setActiveFilters] = useState({
+    equipment: [],
+    vehicleType: [],
+    location: "",
+  });
 
   useEffect(() => {
     if (status === "idle") {
@@ -16,18 +20,51 @@ const CatalogPage = () => {
     }
   }, [dispatch, status]);
 
-  const handleFilterChange = (filter) => {
-    setActiveFilters((prevFilters) =>
-      prevFilters.includes(filter)
-        ? prevFilters.filter((f) => f !== filter)
-        : [...prevFilters, filter]
-    );
+  const handleFilterChange = (filterType, filterValue) => {
+    setActiveFilters((prevFilters) => {
+      const isFilterActive = prevFilters[filterType].includes(filterValue);
+      const updatedFilters = isFilterActive
+        ? prevFilters[filterType].filter((item) => item !== filterValue)
+        : [...prevFilters[filterType], filterValue];
+
+      return {
+        ...prevFilters,
+        [filterType]: updatedFilters,
+      };
+    });
+  };
+
+  const handleLocationChange = (location) => {
+    setActiveFilters((prevFilters) => ({
+      ...prevFilters,
+      location,
+    }));
+  };
+
+  const isActiveFilter = (filterType, filterValue) => {
+    return activeFilters[filterType].includes(filterValue);
   };
 
   const filteredCampersList =
-    campers?.items?.filter((camper) =>
-      activeFilters.every((filter) => camper[filter] === true)
-    ) || [];
+    campers?.items?.filter((camper) => {
+      const matchesEquipment = activeFilters.equipment.every((filter) => {
+        if (filter === "transmission") {
+          return camper.transmission === "automatic";
+        }
+        return camper[filter] === true; 
+      });
+
+      const matchesVehicleType =
+        !activeFilters.vehicleType.length ||
+        activeFilters.vehicleType.includes(camper.form); 
+      const matchesLocation =
+        !activeFilters.location ||
+        camper.location
+          .toLowerCase()
+          .includes(activeFilters.location.toLowerCase());
+
+      return matchesEquipment && matchesVehicleType && matchesLocation;
+    }) || [];
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -39,7 +76,12 @@ const CatalogPage = () => {
 
   return (
     <div className={styles.catalog_container}>
-      <CatalogFilter onFilterChange={handleFilterChange} />
+      <CatalogFilter
+        onFilterChange={handleFilterChange}
+        onLocationChange={handleLocationChange}
+        isActiveFilter={isActiveFilter}
+      />
+
       <div className={styles.cards_section}>
         {filteredCampersList.length > 0 ? (
           filteredCampersList.map((camper) => (
