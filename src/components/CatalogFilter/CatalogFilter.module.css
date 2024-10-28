@@ -1,8 +1,6 @@
 .filter_section {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 48px 64px;
 }
 
 .location {
@@ -56,6 +54,7 @@
 }
 
 .filters_title {
+  margin-bottom: 32px;
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;

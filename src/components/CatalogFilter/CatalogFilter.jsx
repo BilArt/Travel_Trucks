@@ -104,7 +104,6 @@ const CatalogFilter = ({
 CatalogFilter.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
   onLocationChange: PropTypes.func.isRequired,
-  activeFilters: PropTypes.object.isRequired,
   isActiveFilter: PropTypes.func.isRequired,
 };
 

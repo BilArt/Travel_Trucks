@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/campersSlice";
 import CamperCard from "../../components/CamperCard/CamperCard";
 import CatalogFilter from "../../components/CatalogFilter/CatalogFilter";
 import styles from "./CatalogPage.module.css";
+import debounce from "lodash.debounce";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const CatalogPage = () => {
         [filterType]: updatedFilters,
       };
 
-      console.log("Updated activeFilters:", newFilters);
       return newFilters;
     });
   };
@@ -42,6 +42,15 @@ const CatalogPage = () => {
       ...prevFilters,
       location,
     }));
+  };
+
+  const debouncedLocationChange = useCallback(
+    debounce(handleLocationChange, 300),
+    []
+  );
+
+  const handleLocationInputChange = (location) => {
+    debouncedLocationChange(location);
   };
 
   const isActiveFilter = (filterType, filterValue) => {
@@ -84,7 +93,7 @@ const CatalogPage = () => {
     <div className={styles.catalog_container}>
       <CatalogFilter
         onFilterChange={handleFilterChange}
-        onLocationChange={handleLocationChange}
+        onLocationChange={handleLocationInputChange}
         isActiveFilter={isActiveFilter}
         activeFilters={activeFilters}
       />
