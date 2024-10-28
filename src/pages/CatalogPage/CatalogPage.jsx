@@ -51,12 +51,13 @@ const CatalogPage = () => {
         if (filter === "transmission") {
           return camper.transmission === "automatic";
         }
-        return camper[filter] === true; 
+        return camper[filter] === true;
       });
 
       const matchesVehicleType =
         !activeFilters.vehicleType.length ||
-        activeFilters.vehicleType.includes(camper.form); 
+        activeFilters.vehicleType.includes(camper.form);
+
       const matchesLocation =
         !activeFilters.location ||
         camper.location
