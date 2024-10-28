@@ -32,7 +32,7 @@ const CatalogPage = () => {
         [filterType]: updatedFilters,
       };
 
-      console.log("Updated activeFilters:", newFilters); // Логирование активных фильтров
+      console.log("Updated activeFilters:", newFilters);
       return newFilters;
     });
   };
@@ -63,9 +63,6 @@ const CatalogPage = () => {
           (filter) => filter.toLowerCase() === camper.form.toLowerCase()
         );
 
-      console.log("Camper form:", camper.form); // Логирование значения form каждого кемпера
-      console.log("Matches vehicle type:", matchesVehicleType); // Проверка совпадения фильтра с camper.form
-
       const matchesLocation =
         !activeFilters.location ||
         camper.location
@@ -89,6 +86,7 @@ const CatalogPage = () => {
         onFilterChange={handleFilterChange}
         onLocationChange={handleLocationChange}
         isActiveFilter={isActiveFilter}
+        activeFilters={activeFilters}
       />
 
       <div className={styles.cards_section}>
