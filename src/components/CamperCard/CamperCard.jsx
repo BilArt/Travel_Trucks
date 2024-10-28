@@ -8,18 +8,27 @@ const CamperCard = ({ camper }) => {
   const maxDescriptionLength = 60;
   const maxNameLength = 22;
 
+  // Список обраних кемперів із localStorage або порожній масив, якщо його немає
   const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  const [isFavorite, setIsFavorite] = useState(savedFavorites.includes(camper.id));
 
+  // Создаємо стан для перевірки, чи обраний цей кемпер
+  const [isFavorite, setIsFavorite] = useState(
+    savedFavorites.includes(camper.id)
+  );
+
+  // Оновлення localStorage, коли змінюється список обраних кемперів
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(savedFavorites));
   }, [savedFavorites]);
 
+  // Обробник для перемикання стану "обране" для поточного кемпера
   const handleFavoriteClick = () => {
     let updatedFavorites;
     if (isFavorite) {
+      // Якщо кемпер був обраний, видаляю його з списку обраних
       updatedFavorites = savedFavorites.filter((id) => id !== camper.id);
     } else {
+      // Якщо кемпер не був обраний, додаю його до списку обраних
       updatedFavorites = [...savedFavorites, camper.id];
     }
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -32,7 +41,11 @@ const CamperCard = ({ camper }) => {
 
   const featuresList = [
     { name: "AC", icon: "ac", available: camper.AC },
-    { name: "Automatic", icon: "transmission", available: camper.transmission === "automatic" },
+    {
+      name: "Automatic",
+      icon: "transmission",
+      available: camper.transmission === "automatic",
+    },
     { name: "Kitchen", icon: "cup_hot", available: camper.kitchen },
     { name: "TV", icon: "tv", available: camper.TV },
     { name: "Bathroom", icon: "shower", available: camper.bathroom },
@@ -46,11 +59,17 @@ const CamperCard = ({ camper }) => {
       </div>
       <div className={styles.details}>
         <div className={styles.name_and_price_favorite}>
-          <h2 className={styles.name}>{truncateText(camper.name, maxNameLength)}</h2>
+          <h2 className={styles.name}>
+            {truncateText(camper.name, maxNameLength)}
+          </h2>
           <div className={styles.price_and_favorite}>
-            <p className={styles.price}>€{camper.price ? camper.price.toFixed(2) : "N/A"}</p>
+            <p className={styles.price}>
+              €{camper.price ? camper.price.toFixed(2) : "N/A"}
+            </p>
             <svg
-              className={`${styles.favorite_icon} ${isFavorite ? styles.active : ""}`}
+              className={`${styles.favorite_icon} ${
+                isFavorite ? styles.active : ""
+              }`}
               onClick={handleFavoriteClick}
             >
               <use xlinkHref={`${iconSprite}#icon-heart`}></use>
@@ -59,7 +78,12 @@ const CamperCard = ({ camper }) => {
         </div>
         <div className={styles.rating_and_location}>
           <span className={styles.rating}>
-            <svg className={styles.star_icon} style={{ fill: camper.reviews?.length ? "#ffc531" : "currentColor" }}>
+            <svg
+              className={styles.star_icon}
+              style={{
+                fill: camper.reviews?.length ? "#ffc531" : "currentColor",
+              }}
+            >
               <use xlinkHref={`${iconSprite}#icon-rating_star`}></use>
             </svg>
             {camper.rating} ({camper.reviews?.length || 0} Reviews)
@@ -71,7 +95,9 @@ const CamperCard = ({ camper }) => {
             {camper.location}
           </span>
         </div>
-        <p className={styles.description}>{truncateText(camper.description, maxDescriptionLength)}</p>
+        <p className={styles.description}>
+          {truncateText(camper.description, maxDescriptionLength)}
+        </p>
         <div className={styles.features}>
           {featuresList
             .filter((feature) => feature.available)
@@ -84,7 +110,10 @@ const CamperCard = ({ camper }) => {
               </div>
             ))}
         </div>
-        <Link to={`/catalog/${camper.id}`} className={`primary_button ${styles.show_more_button}`}>
+        <Link
+          to={`/catalog/${camper.id}`}
+          className={`primary_button ${styles.show_more_button}`}
+        >
           Show more
         </Link>
       </div>
