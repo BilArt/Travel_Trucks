@@ -1,11 +1,11 @@
+// src/pages/CamperDetailPage/CamperDetailPage.jsx
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchCamperById } from "../../redux/campersSlice";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CamperDetailPage.module.css";
 import iconSprite from "../../assets/icons.svg";
+import BookingForm from "../../components/BookingForm/BookingForm";
 
 const CamperDetailPage = () => {
   const { id } = useParams();
@@ -13,7 +13,6 @@ const CamperDetailPage = () => {
   const { camper, status, error } = useSelector((state) => state.campers);
 
   const [activeTab, setActiveTab] = useState("features");
-  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
@@ -121,7 +120,7 @@ const CamperDetailPage = () => {
             </div>
 
             <div className={styles.details}>
-              <h2 className={styles.section_title}>Vehicle details</h2>
+                <h2 className={styles.section_title}>Vehicle details</h2>
               <p>
                 <strong>Form:</strong> {camper.form}
               </p>
@@ -181,36 +180,7 @@ const CamperDetailPage = () => {
         )}
 
         <div className={styles.booking_section}>
-          <h2 className={`${styles.section_title} ${styles.form_title}`}>
-            Book your campervan now
-          </h2>
-          <p className={styles.form_text}>
-            Stay connected! We are always ready to help you.
-          </p>
-          <form className={styles.booking_form}>
-            <input type="text" placeholder="Name*" required />
-            <input type="email" placeholder="Email*" required />
-
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              dateFormat="dd.MM.yyyy"
-              placeholderText="dd.mm.yyyy"
-              className={`${styles.input} ${styles.date_input}`}
-            />
-
-            <textarea
-              placeholder="Comment"
-              rows="3"
-              style={{ resize: "none" }}
-            ></textarea>
-            <button
-              type="submit"
-              className={`${styles.submit_button} primary_button`}
-            >
-              Send
-            </button>
-          </form>
+          <BookingForm />
         </div>
       </div>
     </div>

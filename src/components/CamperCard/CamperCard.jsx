@@ -1,4 +1,3 @@
-// src/components/CamperCard/CamperCard.jsx
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import iconSprite from "../../assets/icons.svg";
