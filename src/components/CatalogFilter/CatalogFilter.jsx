@@ -17,7 +17,7 @@ const CatalogFilter = ({
 
   const vehicleTypeFilters = [
     { label: "Van", icon: "grid_1_2", value: "van" },
-    { label: "Fully Integrated", icon: "grid_2_2", value: "integrated" },
+    { label: "Fully Integrated", icon: "grid_2_2", value: "fullyIntegrated" },
     { label: "Alcove", icon: "grid_3_3", value: "alcove" },
   ];
 

@@ -27,10 +27,13 @@ const CatalogPage = () => {
         ? prevFilters[filterType].filter((item) => item !== filterValue)
         : [...prevFilters[filterType], filterValue];
 
-      return {
+      const newFilters = {
         ...prevFilters,
         [filterType]: updatedFilters,
       };
+
+      console.log("Updated activeFilters:", newFilters); // Логирование активных фильтров
+      return newFilters;
     });
   };
 
@@ -56,7 +59,12 @@ const CatalogPage = () => {
 
       const matchesVehicleType =
         !activeFilters.vehicleType.length ||
-        activeFilters.vehicleType.includes(camper.form);
+        activeFilters.vehicleType.some(
+          (filter) => filter.toLowerCase() === camper.form.toLowerCase()
+        );
+
+      console.log("Camper form:", camper.form); // Логирование значения form каждого кемпера
+      console.log("Matches vehicle type:", matchesVehicleType); // Проверка совпадения фильтра с camper.form
 
       const matchesLocation =
         !activeFilters.location ||
