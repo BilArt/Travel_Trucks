@@ -1,4 +1,3 @@
-/* src/components/BookingForm/BookingForm.module.css */
 .booking_section {
   background-color: var(--white);
   padding: 44px 57px;
@@ -42,6 +41,7 @@
   outline: none;
 }
 
+.input,
 .date_input {
   width: 92%;
 }
@@ -57,4 +57,10 @@
   margin: auto;
   color: var(--white);
   font-weight: 600;
+}
+
+.error_message {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
 }
